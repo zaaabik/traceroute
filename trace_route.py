@@ -1,4 +1,5 @@
 import socket
+import struct
 
 
 class Traceroute:
@@ -12,6 +13,8 @@ class Traceroute:
         icmp = socket.getprotobyname('icmp')
         udp = socket.getprotobyname('udp')
         receiver = socket.socket(socket.AF_INET, socket.SOCK_RAW, icmp)
+        timeout = struct.pack("ll", 5, 0)
+        receiver.setsockopt(socket.SOL_SOCKET, socket.SO_RCVTIMEO, timeout)
         sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, udp)
         return receiver, sender
 
