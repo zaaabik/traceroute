@@ -45,7 +45,7 @@ class Traceroute:
                 curr_host = "*"
             print(f'{ttl}, {curr_host}')
 
-            if curr_addr == self.address or ttl > self.max_hops:
+            if curr_addr == dest_addr or ttl > self.max_hops:
                 break
 
             ttl += 1
