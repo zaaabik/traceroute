@@ -6,7 +6,7 @@ class Traceroute:
 
     def __init__(self, address, max_hops=25):
         self.address = address
-        self.max_hoops = max_hops
+        self.max_hops = max_hops
 
     def __create_sockets(self):
         icmp = socket.getprotobyname('icmp')
