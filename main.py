@@ -10,8 +10,8 @@ def main():
         exit(0)
     big_tr = Traceroute(address)
     big_tr.run()
-    tr = Traceroute(address, True)
-    tr.run()
+    tr = Traceroute(address)
+    tr.run(big_package=True)
 
 
 if __name__ == '__main__':
