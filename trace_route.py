@@ -9,8 +9,10 @@ class Traceroute:
         self.max_hoops = max_hops
 
     def __create_sockets(self):
-        receiver = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_ICMP)
-        sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.SOCK_DGRAM)
+        icmp = socket.getprotobyname('icmp')
+        udp = socket.getprotobyname('udp')
+        receiver = socket.socket(socket.AF_INET, socket.SOCK_RAW, icmp)
+        sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, udp)
         return receiver, sender
 
     def run(self):
