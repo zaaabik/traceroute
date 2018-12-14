@@ -8,7 +8,7 @@ def main():
     if address is None:
         print('address not valid')
         exit(0)
-    tr = Traceroute(address)
+    tr = Traceroute(address, True)
     tr.run()
 
 

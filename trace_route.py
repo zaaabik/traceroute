@@ -18,7 +18,7 @@ class Traceroute:
         sender = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, udp)
         return receiver, sender
 
-    def run(self):
+    def run(self, big_package=False):
         ttl = 1
         port = 33434
         receiver, sender = self.__create_sockets()
@@ -27,7 +27,10 @@ class Traceroute:
             sender.setsockopt(socket.SOL_IP, socket.IP_TTL, ttl)
             receiver.bind(('', port))
 
-            sender.sendto(b"", (dest_addr, port))
+            pkg = b''
+            if big_package:
+                pkg = bytes([0x13] * 1000)
+            sender.sendto(pkg, (dest_addr, port))
 
             curr_addr = None
             curr_name = None
