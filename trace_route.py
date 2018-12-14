@@ -20,9 +20,13 @@ class Traceroute:
 
     def run(self, big_package=False):
         ttl = 1
-        port = 33434
+        if big_package:
+            port = 33434
+        else:
+            port = 33437
         receiver, sender = self.__create_sockets()
         dest_addr = socket.gethostbyname(self.address)
+        results = []
         while 1:
             sender.setsockopt(socket.SOL_IP, socket.IP_TTL, ttl)
             receiver.bind(('', port))
@@ -49,9 +53,15 @@ class Traceroute:
                 curr_host = "%s (%s)" % (curr_name, curr_addr)
             else:
                 curr_host = "*"
-            print(f'{ttl}, {curr_host}')
+            results.append(f'{ttl}, {curr_host}')
 
             if curr_addr == dest_addr or ttl > self.max_hops:
                 break
 
             ttl += 1
+        if big_package:
+            print('big')
+        else:
+            print('small')
+        for r in results:
+            print(r)
