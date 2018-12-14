@@ -5,7 +5,7 @@ class Traceroute:
     port = 33434
 
     def __init__(self, address, max_hops=25):
-        self.address = socket.gethostbyaddr(address)
+        self.address = address
         self.max_hoops = max_hops
 
     def __create_sockets(self):
@@ -19,11 +19,12 @@ class Traceroute:
         ttl = 1
         port = 33434
         receiver, sender = self.__create_sockets()
+        dest_addr = socket.gethostbyname(self.address)
         while 1:
             sender.setsockopt(socket.SOL_IP, socket.IP_TTL, ttl)
             receiver.bind(('', port))
 
-            sender.sendto(b'', (self.address, port))
+            sender.sendto(b"", (dest_addr, port))
 
             curr_addr = None
             curr_name = None
