@@ -3,8 +3,6 @@ import struct
 
 
 class Traceroute:
-    port = 33434
-
     def __init__(self, address, max_hops=25):
         self.address = address
         self.max_hops = max_hops

@@ -1,17 +1,21 @@
-import sys
+import argparse
 
 from trace_route import Traceroute
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--address')
+parser.add_argument('--b', action='store_true')
+args = parser.parse_args()
+
 
 def main():
-    address = sys.argv[1]
-    if address is None:
-        print('address not valid')
-        exit(0)
+    address = args.address
     big_tr = Traceroute(address)
     big_tr.run()
-    tr = Traceroute(address)
-    tr.run(big_package=True)
+    print(args.b)
+    if args.b:
+        tr = Traceroute(address)
+        tr.run(big_package=True)
 
 
 if __name__ == '__main__':
