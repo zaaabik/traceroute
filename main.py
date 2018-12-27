@@ -4,17 +4,15 @@ from trace_route import Traceroute
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--address')
-parser.add_argument('-b', action='store_true')
+parser.add_argument('--port')
 args = parser.parse_args()
 
 
 def main():
     address = args.address
-    big_tr = Traceroute(address)
+    port = int(args.port)
+    big_tr = Traceroute(address, port)
     big_tr.run()
-    if args.b:
-        tr = Traceroute(address)
-        tr.run(big_package=True)
 
 
 if __name__ == '__main__':
